@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Coral Inc. - Filozofia wewnętrznego bogactwa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 25%, #0f2438 50%, #1a1a2e 75%, #0a0e27 100%);
+            color: #ffffff;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #D4AF37;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover {
+            color: #D4AF37;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        main {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+        .hero {
+            padding-top: 12rem;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, rgba(0, 17, 34, 0.3) 40%, transparent 70%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(0, 150, 200, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #D4AF37;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.4), 0 0 80px rgba(212, 175, 55, 0.2);
+            letter-spacing: 4px;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #ffffff;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        .manifest {
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #D4AF37;
+            line-height: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        .stories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 6rem;
+        }
+        .feature-card {
+            padding: 2rem;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #D4AF37;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .story {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(212, 175, 55, 0.02) 100%);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        .story:hover::before {
+            left: 100%;
+        }
+        .story:hover {
+            transform: translateY(-12px);
+            border-color: rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(212, 175, 55, 0.05) 100%);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+        }
+        .story h3 {
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+        }
+        .story p {
+            font-size: 1.1rem;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: 'Inter', sans-serif;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #D4AF37;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.05);
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        button {
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #B8860B 100%);
+            color: #000;
+            border: none;
+            padding: 1.1rem 3.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.4s;
+        }
+        button:hover::before {
+            left: 100%;
+        }
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #D4AF37;
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            border-top: 2px solid rgba(212, 175, 55, 0.4);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+            letter-spacing: 2px;
+            background: rgba(212, 175, 55, 0.05);
+            position: relative;
+        }
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            section {
+                padding: 4rem 1.5rem;
+            }
+            .hero {
+                padding-top: 8rem;
+            }
+            h1 {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        section {
+            animation: fadeInUp 1s ease-out;
+        }
+        .feature-card {
+            animation: scaleIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        .feature-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .feature-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        .feature-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        .story {
+            animation: slideInLeft 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        .story:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .story:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        .story:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+        h1 {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: -1000px 0;
+            }
+            50% {
+                background-position: 1000px 0;
+            }
+        }
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        section {
+            animation: fadeInUp 1s ease-out;
+        }
+        .feature-card {
+            animation: scaleIn 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        .feature-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .feature-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        .feature-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        .story {
+            animation: slideInLeft 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+        .story:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .story:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        .story:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+        h1 {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Golden Coral Inc.</div>
+            <ul class="nav-links">
+                <li><a href="#strona-glowna">Strona główna</a></li>
+                <li><a href="#filozofia">Filozofia</a></li>
+                <li><a href="#program">Program transformacji</a></li>
+                <li><a href="#historie">historie sukcesu</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="strona-glowna" class="hero">
+            <h1>Golden Coral Inc.</h1>
+            <p class="manifest">Bogactwo nie jest celem. Jest stanem umysłu. Jak złoto na dnie oceanu, czeka w ciszy na tych, którzy odważą się zanurzyć głębiej. Golden Coral Inc. to ścieżka do wewnętrznej harmonii, pewności i porządku w chaosie życia.</p>
+        </section>
+
+        <section id="filozofia">
+            <h2>Filozofia</h2>
+            <p>Życie w obfitości zaczyna się od harmonii umysłu. Jak koralowce budują swoje imperium na dnie oceanu, tak Ty budujesz swoje bogactwo w ciszy i porządku. Golden Coral Inc. to filozofia samodoskonalenia – jasna, wyważona, wolna od iluzji szybkich triumfów.</p>
+            <p>Ufność płynie z głębi, nie z powierzchni. W świecie chaosu, porządek staje się Twoją największą siłą. To droga do lepszej wersji siebie, gdzie każdy krok jest świadomy i celowy.</p>
+        </section>
+
+        <section id="program">
+            <h2>Program transformacji</h2>
+            <p>„Porządkowanie życia" to koncepcja mentalnej transformacji. Nie obiecujemy cudów, lecz narzędzia do budowania dyscypliny umysłu. Jak światło przenika ciemność oceanu, tak jasność myśli rozświetla Twoje ścieżki.</p>
+            <p>Program skupia się na trzech filarach: klarowności umysłu, sile woli i harmonii wewnętrznej. To proces, wymagający czasu i zaangażowania – złoto hartuje się w ogniu próby.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Klarowność umysłu</h3>
+                    <p>Rozwinięcie zdolności logicznego myślenia i eliminacja szumu mentalnego. Nauka radzenia sobie z chaosem poprzez porządek w głowie.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>Siła woli</h3>
+                    <p>Budowanie dyscypliny jako fundamentu sukcesu. Narzędzia do przezwyciężania oporów i konsekwentnego dążenia do celów.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌀</div>
+                    <h3>Harmonia wewnętrzna</h3>
+                    <p>Osiągnięcie równowagi między ambicją a pokojem. Życie w zgodzie z własnymi wartościami i głębokim poczuciem celowości.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="historie">
+            <h2>Historie sukcesu</h2>
+            <div class="stories">
+                <div class="story">
+                    <h3>Jan K.</h3>
+                    <p>Znalazłem spokój w chaosie biznesu. Golden Coral nauczyło mnie, że prawdziwa siła płynie z porządku w myślach, nie z zewnętrznych osiągnięć.</p>
+                </div>
+                <div class="story">
+                    <h3>Marta L.</h3>
+                    <p>Jak koral na dnie oceanu, odkryłam swoje wewnętrzne złoto. Teraz żyję z pewnością, która przyciąga obfitość naturalnie.</p>
+                </div>
+                <div class="story">
+                    <h3>Paweł M.</h3>
+                    <p>Transformacja nie była łatwa, ale przyniosła klarowność. Dziś kieruję swoim życiem z siłą, jakiej nie znałem wcześniej.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontakt">
+            <h2>Dołącz do naszej społeczności</h2>
+            <p>Osób, które zmieniły swoje życie dzięki Golden Coral Inc. философии już ponad 2000. Ty możesz być następny.</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin: 4rem 0; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <div style="text-align: left; padding: 2rem; background: rgba(212, 175, 55, 0.08); border-radius: 10px;">
+                    <h3 style="color: #D4AF37; margin-bottom: 1rem;">Darmowy dostęp</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">✓ Warsztat „Porządkowanie życia"</li>
+                        <li style="margin-bottom: 0.8rem;">✓ E-book z 10 praktykami</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Dostęp do społeczności</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Cotygodniowe inspiracje</li>
+                    </ul>
+                </div>
+                <div style="text-align: left; padding: 2rem; background: rgba(212, 175, 55, 0.12); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px;">
+                    <h3 style="color: #FFD700; margin-bottom: 1rem;">Program Premium</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.8rem;">✓ Indywidualne mentoring</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Rozkład 90-dniowy</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Grupowe sesje transformacji</li>
+                        <li style="margin-bottom: 0.8rem;">✓ Lifetime dostęp do zasobów</li>
+                    </ul>
+                </div>
+            </div>
+
+            <form>
+                <input type="text" placeholder="Twoje imię" required>
+                <input type="email" placeholder="Twój email" required>
+                <select style="width: 100%; padding: 1.2rem; margin-bottom: 1.5rem; background: rgba(255, 255, 255, 0.06); border: 2px solid rgba(212, 175, 55, 0.2); border-radius: 8px; color: #ffffff; font-size: 1rem; backdrop-filter: blur(15px);">
+                    <option value="" style="background: #000; color: #fff;">Wybierz opcję</option>
+                    <option value="free" style="background: #000; color: #fff;">Darmowy dostęp</option>
+                    <option value="premium" style="background: #000; color: #fff;">Program Premium</option>
+                    <option value="inquiry" style="background: #000; color: #fff;">Mam pytanie</option>
+                </select>
+                <textarea rows="5" placeholder="Twoja wiadomość lub pytanie" required></textarea>
+                <button type="submit">Rozpocznij transformację</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; padding-bottom: 3rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left;">
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 1rem; font-family: 'Cinzel', serif;">Golden Coral Inc.</h4>
+                <p style="font-size: 0.95rem; opacity: 0.8;">Filozofia wewnętrznego bogactwa i samodoskonalenia</p>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 1rem; font-family: 'Cinzel', serif;">Nawigacja</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#filozofia" style="color: #fff; text-decoration: none; opacity: 0.7; transition: opacity 0.3s;">Filozofia</a></li>
+                    <li><a href="#program" style="color: #fff; text-decoration: none; opacity: 0.7; transition: opacity 0.3s;">Program</a></li>
+                    <li><a href="#historie" style="color: #fff; text-decoration: none; opacity: 0.7; transition: opacity 0.3s;">Historie</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: #D4AF37; margin-bottom: 1rem; font-family: 'Cinzel', serif;">Kontakt</h4>
+                <p style="font-size: 0.95rem; opacity: 0.8;">hello@goldencoralinc.com</p>
+                <p style="font-size: 0.95rem; opacity: 0.8;">+48 123 456 789</p>
+            </div>
+        </div>
+        <p class="quote">„Złoto jest w tobie. Reszta to tylko forma."</p>
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.6;">© 2025 Golden Coral Inc. Wszystkie prawa zastrzeżone.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll with animations
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.classList.add('fade-in-on-scroll');
+            observer.observe(card);
+        });
+
+        // Observe paragraphs
+        document.querySelectorAll('p:not(.manifest)').forEach(p => {
+            p.classList.add('fade-in-on-scroll');
+            observer.observe(p);
+        });
+
+        // Parallax scroll effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.backgroundPosition = `0 ${scrolled * 0.5}px`;
+            }
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button');
+            button.textContent = 'Wysyłam...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = 'Rozpocznij transformację';
+                button.disabled = false;
+                alert('Dziękujemy za wiadomość! Skontaktujemy się z Tobą wkrótce.');
+                this.reset();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
